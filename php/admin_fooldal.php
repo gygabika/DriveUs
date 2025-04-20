@@ -27,13 +27,13 @@
             $kep_url = $_POST['kep_url'];
             $jarmuAz = $_POST['jarmuAz'];
             if (!empty($kep_url) && !empty($jarmuAz)) {
-                $stmt = $conn->prepare("INSERT INTO kepek (kep_url, jarmuAz, archivalva) VALUES (?, ?, 0)");
+                $stmt = $sql->prepare("INSERT INTO kepek (kep_url, jarmuAz, archivalva) VALUES (?, ?, 0)");
                 $stmt->bind_param("si", $kep_url, $jarmuAz);
                 if ($stmt->execute()) {
                     $message = "Kép sikeresen hozzáadva!";
                     $message_class = 'success';
                 } else {
-                    $message = "Hiba a kép hozzáadása során: " . $conn->error;
+                    $message = "Hiba a kép hozzáadása során: " . $sql->error;
                     $message_class = 'error';
                 }
                 $stmt->close();
@@ -48,13 +48,13 @@
             $kep_url = $_POST['kep_url'];
             $jarmuAz = $_POST['jarmuAz'];
             if (!empty($kep_url) && !empty($jarmuAz)) {
-                $stmt = $conn->prepare("UPDATE kepek SET kep_url = ?, jarmuAz = ? WHERE Az = ?");
+                $stmt = $sql->prepare("UPDATE kepek SET kep_url = ?, jarmuAz = ? WHERE Az = ?");
                 $stmt->bind_param("sii", $kep_url, $jarmuAz, $id);
                 if ($stmt->execute()) {
                     $message = "Kép sikeresen szerkesztve!";
                     $message_class = 'success';
                 } else {
-                    $message = "Hiba a kép szerkesztése során: " . $conn->error;
+                    $message = "Hiba a kép szerkesztése során: " . $sql->error;
                     $message_class = 'error';
                 }
                 $stmt->close();
@@ -66,13 +66,13 @@
 
         if ($action === 'delete_image') {
             $id = $_POST['id'];
-            $stmt = $conn->prepare("DELETE FROM kepek WHERE Az = ?");
+            $stmt = $sql->prepare("DELETE FROM kepek WHERE Az = ?");
             $stmt->bind_param("i", $id);
             if ($stmt->execute()) {
                 $message = "Kép sikeresen törölve!";
                 $message_class = 'success';
             } else {
-                $message = "Hiba a kép törlése során: " . $conn->error;
+                $message = "Hiba a kép törlése során: " . $sql->error;
                 $message_class = 'error';
             }
             $stmt->close();
@@ -80,13 +80,13 @@
 
         if ($action === 'archive_image') {
             $id = $_POST['id'];
-            $stmt = $conn->prepare("UPDATE kepek SET archivalva = 1 WHERE Az = ?");
+            $stmt = $sql->prepare("UPDATE kepek SET archivalva = 1 WHERE Az = ?");
             $stmt->bind_param("i", $id);
             if ($stmt->execute()) {
                 $message = "Kép sikeresen archiválva!";
                 $message_class = 'success';
             } else {
-                $message = "Hiba a kép archiválása során: " . $conn->error;
+                $message = "Hiba a kép archiválása során: " . $sql->error;
                 $message_class = 'error';
             }
             $stmt->close();
@@ -94,13 +94,13 @@
 
         if ($action === 'restore_image') {
             $id = $_POST['id'];
-            $stmt = $conn->prepare("UPDATE kepek SET archivalva = 0 WHERE Az = ?");
+            $stmt = $sql->prepare("UPDATE kepek SET archivalva = 0 WHERE Az = ?");
             $stmt->bind_param("i", $id);
             if ($stmt->execute()) {
                 $message = "Kép sikeresen visszaállítva!";
                 $message_class = 'success';
             } else {
-                $message = "Hiba a kép visszaállítása során: " . $conn->error;
+                $message = "Hiba a kép visszaállítása során: " . $sql->error;
                 $message_class = 'error';
             }
             $stmt->close();
@@ -122,13 +122,13 @@
             $kep_url = $_POST['kep_url'];
 
             if (!empty($rendszam) && !empty($marka) && !empty($modell) && !empty($evjarat) && !empty($kolcsonzesiAr) && !empty($kep_url) && !empty($telephelyAz)) {
-                $stmt = $conn->prepare("INSERT INTO jarmuvek (rendszam, marka, modell, evjarat, uzemanyag, szin, hengerur, kolcsonzesiAr, ulesekSzama, tipus, allapot, telephelyAz, kep_url, archivalva) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)");
+                $stmt = $sql->prepare("INSERT INTO jarmuvek (rendszam, marka, modell, evjarat, uzemanyag, szin, hengerur, kolcsonzesiAr, ulesekSzama, tipus, allapot, telephelyAz, kep_url, archivalva) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)");
                 $stmt->bind_param("sssissiiissis", $rendszam, $marka, $modell, $evjarat, $uzemanyag, $szin, $hengeres, $kolcsonzesiAr, $ulesekSzama, $tipus, $allapot, $telephelyAz, $kep_url);
                 if ($stmt->execute()) {
                     $message = "Autó sikeresen hozzáadva!";
                     $message_class = 'success';
                 } else {
-                    $message = "Hiba az autó hozzáadása során: " . $conn->error;
+                    $message = "Hiba az autó hozzáadása során: " . $sql->error;
                     $message_class = 'error';
                 }
                 $stmt->close();
@@ -154,13 +154,13 @@
             $telephelyAz = isset($_POST['telephelyAz']) && !empty($_POST['telephelyAz']) ? $_POST['telephelyAz'] : 0;
             $kep_url = $_POST['kep_url'];
 
-            $stmt = $conn->prepare("UPDATE jarmuvek SET rendszam = ?, marka = ?, modell = ?, evjarat = ?, uzemanyag = ?, szin = ?, hengerur = ?, kolcsonzesiAr = ?, ulesekSzama = ?, tipus = ?, allapot = ?, telephelyAz = ?, kep_url = ? WHERE jarmuAz = ?");
+            $stmt = $sql->prepare("UPDATE jarmuvek SET rendszam = ?, marka = ?, modell = ?, evjarat = ?, uzemanyag = ?, szin = ?, hengerur = ?, kolcsonzesiAr = ?, ulesekSzama = ?, tipus = ?, allapot = ?, telephelyAz = ?, kep_url = ? WHERE jarmuAz = ?");
             $stmt->bind_param("sssissiiisssisi", $rendszam, $marka, $modell, $evjarat, $uzemanyag, $szin, $hengeres, $kolcsonzesiAr, $ulesekSzama, $tipus, $allapot, $telephelyAz, $kep_url, $id);
             if ($stmt->execute()) {
                 $message = "Autó sikeresen szerkesztve!";
                 $message_class = 'success';
             } else {
-                $message = "Hiba az autó szerkesztése során: " . $conn->error;
+                $message = "Hiba az autó szerkesztése során: " . $sql->error;
                 $message_class = 'error';
             }
             $stmt->close();
@@ -168,13 +168,13 @@
 
         if ($action === 'delete_car') {
             $id = $_POST['id'];
-            $stmt = $conn->prepare("DELETE FROM jarmuvek WHERE jarmuAz = ?");
+            $stmt = $sql->prepare("DELETE FROM jarmuvek WHERE jarmuAz = ?");
             $stmt->bind_param("i", $id);
             if ($stmt->execute()) {
                 $message = "Autó sikeresen törölve!";
                 $message_class = 'success';
             } else {
-                $message = "Hiba az autó törlése során: " . $conn->error;
+                $message = "Hiba az autó törlése során: " . $sql->error;
                 $message_class = 'error';
             }
             $stmt->close();
@@ -182,13 +182,13 @@
 
         if ($action === 'archive_car') {
             $id = $_POST['id'];
-            $stmt = $conn->prepare("UPDATE jarmuvek SET archivalva = 1 WHERE jarmuAz = ?");
+            $stmt = $sql->prepare("UPDATE jarmuvek SET archivalva = 1 WHERE jarmuAz = ?");
             $stmt->bind_param("i", $id);
             if ($stmt->execute()) {
                 $message = "Autó sikeresen archiválva!";
                 $message_class = 'success';
             } else {
-                $message = "Hiba az autó archiválása során: " . $conn->error;
+                $message = "Hiba az autó archiválása során: " . $sql->error;
                 $message_class = 'error';
             }
             $stmt->close();
@@ -196,13 +196,13 @@
 
         if ($action === 'restore_car') {
             $id = $_POST['id'];
-            $stmt = $conn->prepare("UPDATE jarmuvek SET archivalva = 0 WHERE jarmuAz = ?");
+            $stmt = $sql->prepare("UPDATE jarmuvek SET archivalva = 0 WHERE jarmuAz = ?");
             $stmt->bind_param("i", $id);
             if ($stmt->execute()) {
                 $message = "Autó sikeresen visszaállítva!";
                 $message_class = 'success';
             } else {
-                $message = "Hiba az autó visszaállítása során: " . $conn->error;
+                $message = "Hiba az autó visszaállítása során: " . $sql->error;
                 $message_class = 'error';
             }
             $stmt->close();
@@ -213,26 +213,26 @@
         echo "<p class='message $message_class'>$message</p>";
     }
 
-    $vehicles = $conn->query("SELECT jarmuAz, marka, modell FROM jarmuvek WHERE archivalva = 0");
+    $vehicles = $sql->query("SELECT jarmuAz, marka, modell FROM jarmuvek WHERE archivalva = 0");
 
-    $result_images = $conn->query("SELECT * FROM kepek WHERE archivalva = 0");
+    $result_images = $sql->query("SELECT * FROM kepek WHERE archivalva = 0");
     if (!$result_images) {
-        echo "<p class='message error'>Hiba a képek lekérdezése során: " . $conn->error . "</p>";
+        echo "<p class='message error'>Hiba a képek lekérdezése során: " . $sql->error . "</p>";
     }
 
-    $result_archived_images = $conn->query("SELECT * FROM kepek WHERE archivalva = 1");
+    $result_archived_images = $sql->query("SELECT * FROM kepek WHERE archivalva = 1");
     if (!$result_archived_images) {
-        echo "<p class='message error'>Hiba az archivált képek lekérdezése során: " . $conn->error . "</p>";
+        echo "<p class='message error'>Hiba az archivált képek lekérdezése során: " . $sql->error . "</p>";
     }
 
-    $result_cars = $conn->query("SELECT * FROM jarmuvek WHERE archivalva = 0");
+    $result_cars = $sql->query("SELECT * FROM jarmuvek WHERE archivalva = 0");
     if (!$result_cars) {
-        echo "<p class='message error'>Hiba az autók lekérdezése során: " . $conn->error . "</p>";
+        echo "<p class='message error'>Hiba az autók lekérdezése során: " . $sql->error . "</p>";
     }
 
-    $result_archived_cars = $conn->query("SELECT * FROM jarmuvek WHERE archivalva = 1");
+    $result_archived_cars = $sql->query("SELECT * FROM jarmuvek WHERE archivalva = 1");
     if (!$result_archived_cars) {
-        echo "<p class='message error'>Hiba az archivált autók lekérdezése során: " . $conn->error . "</p>";
+        echo "<p class='message error'>Hiba az archivált autók lekérdezése során: " . $sql->error . "</p>";
     }
     ?>
 
@@ -242,9 +242,6 @@
                 <h2>Admin Panel</h2>
             </div>
             <ul class="navbar-menu">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Felhasználók</a></li>
-                <li><a href="#">Beállítások</a></li>
                 <li><a href="logout.php">Kijelentkezés</a></li>
             </ul>
         </nav>
@@ -336,7 +333,6 @@
         </div>
 
         <h1>Üdvözöllek az Admin oldalon, <?php echo htmlspecialchars($_SESSION['admin_username']); ?>!</h1>
-        <p>Itt kezelheted az oldal tartalmát és a beállításokat.</p>
 
         <h2>Képnézegető Kezelése</h2>
         <h3>Új Kép Hozzáadása</h3>
@@ -373,7 +369,7 @@
                             <td><?php echo htmlspecialchars($row['Az']); ?></td>
                             <td><?php echo htmlspecialchars($row['kep_url']); ?></td>
                             <td>
-                                <button onclick="showEditImageForm(<?php echo $row['Az'] ?? 0; ?>, '<?php echo htmlspecialchars($row['kep_url']); ?>', <?php echo $row['jarmuAz'] ?? 0; ?>)">Szerkesztés</button>
+                                <!--<button onclick="showEditImageForm(<?php echo $row['Az'] ?? 0; ?>, '<?php echo htmlspecialchars($row['kep_url']); ?>', <?php echo $row['jarmuAz'] ?? 0; ?>)">Szerkesztés</button>-->
                                 <form method="POST" style="display:inline;">
                                     <input type="hidden" name="action" value="delete_image">
                                     <input type="hidden" name="id" value="<?php echo $row['Az']; ?>">
@@ -519,7 +515,7 @@
                             <td><?php echo $row['telephelyAz']; ?></td>
                             <td><?php echo htmlspecialchars($row['kep_url']); ?></td>
                             <td>
-                                <button onclick="showEditCarForm(
+                                <!--<button onclick="showEditCarForm(
                                     <?php echo $row['jarmuAz'] ?? 0; ?>,
                                     '<?php echo htmlspecialchars($row['rendszam']); ?>',
                                     '<?php echo htmlspecialchars($row['marka']); ?>',
@@ -534,7 +530,7 @@
                                     '<?php echo htmlspecialchars($row['allapot']); ?>',
                                     <?php echo $row['telephelyAz'] ?? 0; ?>,
                                     '<?php echo htmlspecialchars($row['kep_url']); ?>'
-                                )">Szerkesztés</button>
+                                )">Szerkesztés</button>-->
                                 <form method="POST" style="display:inline;">
                                     <input type="hidden" name="action" value="delete_car">
                                     <input type="hidden" name="id" value="<?php echo $row['jarmuAz']; ?>">
@@ -616,7 +612,7 @@
             </tbody>
         </table>
 
-        <?php $conn->close(); ?>
+        <?php $sql->close(); ?>
     </div>
 
     <script src="admin_scripts.js"></script>

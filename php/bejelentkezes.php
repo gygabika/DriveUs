@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" id="login-button">Bejelentkezés</button>
         </form>
         <p>Nincs fiókod? <a href="./regisztracio.php">Regisztráció</a></p>
-        <a href="./admin.php" id="adminos">Adminisztrátor bejelentkezés</a>
+        <a href="./admin_bejelentkezes.php" id="adminos">Adminisztrátor bejelentkezés</a>
     </div>
     <script src="../js/bejelentkezes.js"></script>
 </body>

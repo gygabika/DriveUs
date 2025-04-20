@@ -25,9 +25,9 @@
 
     include 'config.php';
 
-    $check_user = $conn->query("SELECT * FROM admin WHERE felhasznaloNev = 'admindriveus2025'");
+    $check_user = $sql->query("SELECT * FROM admin WHERE felhasznaloNev = 'admindriveus2025'");
     if ($check_user->num_rows == 0) {
-        $stmt = $conn->prepare("INSERT INTO admin (felhasznaloNev, jelszo) VALUES (?, ?)");
+        $stmt = $sql->prepare("INSERT INTO admin (felhasznaloNev, jelszo) VALUES (?, ?)");
         $stmt->bind_param("ss", $username, $password);
         $username = 'admindriveus2025';
         $password = 'driveus2025';
@@ -44,7 +44,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $stmt = $conn->prepare("SELECT jelszo FROM admin WHERE felhasznaloNev = ?");
+        $stmt = $sql->prepare("SELECT jelszo FROM admin WHERE felhasznaloNev = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -71,7 +71,7 @@
         $stmt->close();
     }
 
-    $conn->close();
+    $sql->close();
     ?>
 
     <div class="login-container">
@@ -81,6 +81,7 @@
             <input type="password" id="password" name="password" placeholder="Jelszó" required>
             <button type="submit" id="login-button">Belépés</button>
         </form>
+        <button onclick="window.location.href='./bejelentkezes.php'" class="backButton">Vissza</button>
         <p class="error" id="error-message"><?php echo $error_message; ?></p>
     </div>
 
