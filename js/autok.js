@@ -1,3 +1,47 @@
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOM fully loaded and parsed'); // Hibakeresés: Ellenőrizzük, hogy a DOM betöltődött-e
+
+    const menuIcon = document.querySelector('.menu-icon');
+    const closeIcon = document.querySelector('.close-icon');
+    const nav = document.querySelector('header nav');
+
+    if (!menuIcon) {
+        console.error('Menu icon not found!');
+        return;
+    }
+
+    if (!closeIcon) {
+        console.error('Close icon not found!');
+        return;
+    }
+
+    if (!nav) {
+        console.error('Navigation not found!');
+        return;
+    }
+
+    console.log('Menu icon, close icon, and nav found'); // Hibakeresés: Ellenőrizzük, hogy az elemek megtalálhatók-e
+
+    menuIcon.addEventListener('click', () => {
+        console.log('Menu icon clicked'); // Hibakeresés: Ellenőrizzük, hogy az eseménykezelő fut-e
+        nav.classList.add('active');
+    });
+
+    closeIcon.addEventListener('click', () => {
+        console.log('Close icon clicked'); // Hibakeresés: Ellenőrizzük, hogy az eseménykezelő fut-e
+        nav.classList.remove('active');
+    });
+
+    // Nav linkekre kattintás esetén is zárjuk be a menüt
+    const navLinks = nav.querySelectorAll("a");
+    navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            console.log("Nav link clicked");
+            nav.classList.remove("active");
+        });
+    });
+});
+
 function openModal(imgElement) {
     var modal = document.createElement('div');
     modal.classList.add('modal', 'open');
@@ -52,17 +96,8 @@ function openCarDetailsPage(carName, imgSrc, details, price) {
                     top: 0;
                     z-index: 10;
                     display: flex;
-                    justify-content: space-between;
-                    align-items: center;
                 }
-                header h1 {
-                    color: #1a1a1a;
-                    font-size: 2.5rem;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 2px;
-                    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-                }
+                
                 .content-wrapper {
                     display: flex;
                     align-items: center;
@@ -250,8 +285,8 @@ function openCarDetailsPage(carName, imgSrc, details, price) {
             </style>
         </head>
         <body>
-            <header>
-                <h1>${carName}</h1>
+            <header> 
+            
             </header>
             <div class="content-wrapper">
                 <div class="car-image">

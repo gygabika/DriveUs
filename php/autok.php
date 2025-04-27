@@ -210,7 +210,9 @@ $sql->close();
 <body>
 <header>
     <div id="cegnev" >DriveUs</div>
+    <div class="menu-icon">☰</div> 
     <nav>
+    <div class="close-icon">Bezárás ✕</div> 
         <a href="./index.php">FŐOLDAL</a>
         <a href="./kapcsolat.php">KAPCSOLAT</a>
         <a href="./profilom.php">PROFILOM</a>
@@ -323,7 +325,7 @@ $sql->close();
                             '<?php echo htmlspecialchars($jarmu['marka'] . ' ' . $jarmu['modell']); ?>',
                             '<?php echo htmlspecialchars(convertGoogleDriveLink($jarmu['kep_url'])); ?>',
                             [
-                                '<?php echo htmlspecialchars($jarmu['hengerur'] . ' hengerűrtartalom'); ?>',
+                                '<?php echo htmlspecialchars($jarmu['hengerur'] . ' cm³ hengerűrtartalom'); ?>',
                                 '<?php echo htmlspecialchars($jarmu['evjarat'] . ' évjárat'); ?>',
                                 '<?php echo htmlspecialchars($jarmu['uzemanyag'] . ' üzemanyag'); ?>',
                                 '<?php echo htmlspecialchars($jarmu['kolcsonzesiAr'] . ' Ft/nap'); ?>',

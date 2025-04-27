@@ -25,26 +25,28 @@ header {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* A navigációs menü középre kerül */
     padding: 10px 20px;
     height: 60px;
 }
  
 header nav {
-    display: flex;
-    gap: 15px;
+    display: flex; /* Asztali nézetben látható */
+    gap: 10px; /* Csökkentett gap az elemek között */
     color: black;
     text-decoration: none;
     font-weight: bold;
+    max-width: 50%; /* Korlátozzuk a nav szélességét */
 }
  
 header nav a {
     color: black;
-    padding: 10px 20px;
+    padding: 10px 15px; /* Csökkentett padding */
     border-radius: 5px;
     transition: all 0.3s ease;
     text-decoration: none;
     font-weight: 700;
+    white-space: nowrap; /* Megakadályozza a szöveg törését */
 }
  
 header nav a:hover {
@@ -56,9 +58,11 @@ header nav a:hover {
  
 #google_translate_element {
     position: absolute;
-    right: 20px;
+    left: 85%; /* Pozíció az index.php alapján */
     top: 50%;
     transform: translateY(-50%);
+    max-width: 150px; /* Szélesség az index.php alapján */
+    overflow: hidden;
 }
 
 #cegnev {
@@ -70,6 +74,27 @@ header nav a:hover {
     transform: translateY(-50%);
     font-size: 24px;
     padding-left: 20px;
+    margin: 0; /* Az eredeti autok.css alapján */
+    display: flex; /* Az eredeti autok.css alapján */
+    align-items: center; /* Az eredeti autok.css alapján */
+    height: 100%; /* Az eredeti autok.css alapján */
+}
+
+.close-icon {
+    display: none; /* Alapértelmezett nézetben rejtve */
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.menu-icon {
+    display: none; /* Alapértelmezett nézetben rejtve */
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
 }
 
 .hero {
@@ -404,34 +429,67 @@ footer p {
     }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
     header {
-        flex-wrap: wrap;
-        height: auto;
-        padding: 10px;
-    }
-    header nav {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: linear-gradient(90deg, rgb(207, 188, 79), #b8860b);
-        padding: 10px;
-        border-radius: 10px;
-        width: 200px;
+        flex-direction: row;
+        justify-content: space-between; /* Az elemek eloszlanak */
         align-items: center;
+        padding: 10px 10px; /* Csökkentett padding a headerben */
     }
+
+    .menu-icon {
+        display: block; /* Mobilnézetben látható */
+        position: absolute;
+        left: 92%; /* Pozíció az index.php alapján */
+        transform: translate(-50%, -50%); /* X és Y tengelyen igazítjuk */
+        top: 50%;
+    }
+
+    .close-icon {
+        display: block; /* Mobilnézetben látható */
+    }
+
+    header nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgb(207, 188, 79), #b8860b);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 0;
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.5);
+        transform: translateX(100%);
+        opacity: 0; /* Alapértelmezett nézetben láthatatlan */
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Animáció transform és opacity tulajdonságokra */
+        z-index: 1000;
+    }
+
     header nav.active {
-        display: flex;
+        transform: translateX(0);
+        opacity: 1; /* Láthatóvá válik, ha .active osztály van */
     }
+
     header nav a {
-        padding: 8px 10px;
+        padding: 20px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        font-size: 18px;
     }
-    .cegnev {
-        font-size: 30px;
+
+    header nav a:last-child {
+        border-bottom: none;
     }
+
+    #google_translate_element {
+        left: 125px; /* Pozíció az index.php alapján */
+        max-width: 150px; /* Szélesség az index.php alapján */
+        overflow: hidden;
+    }
+
     .hero {
         padding: 80px 15px;
     }
@@ -459,9 +517,21 @@ footer p {
 
 @media (max-width: 480px) {
     header nav a {
-        padding: 5px 10px;
-        font-size: 14px;
+        padding: 15px;
+        font-size: 16px;
     }
+
+    #google_translate_element {
+        left: 125px; /* Pozíció az index.php alapján */
+        max-width: 150px; /* Szélesség az index.php alapján */
+        overflow: hidden;
+    }
+
+    .menu-icon {
+        left: 92%; /* Pozíció az index.php alapján */
+        transform: translate(-50%, -50%); /* X és Y tengelyen igazítjuk */
+    }
+
     .hero h1 {
         font-size: 1.8rem;
     }
@@ -501,6 +571,7 @@ footer p {
 #footer_p {
     position: absolute;
     right: 20px;
+    margin: 0;
 }
 
 #email a {
@@ -516,18 +587,4 @@ footer p {
 
 footer, footer p, #footer_p {
     color: black !important;
-}
-
-#cegnev {
-    color: black;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 24px;
-    margin: 0;
-    padding-left: 20px;
 }

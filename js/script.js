@@ -1,41 +1,47 @@
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("script.js loaded");
+document.addEventListener('DOMContentLoaded', function () {
+  console.log('DOM fully loaded and parsed'); // Hibakeresés: Ellenőrizzük, hogy a DOM betöltődött-e
 
-  const menuIcon = document.querySelector(".menu-icon");
-  const nav = document.querySelector("nav");
-  const closeIcon = document.querySelector(".close-icon");
-
-  console.log("Menu elements:", { menuIcon, nav, closeIcon });
+  const menuIcon = document.querySelector('.menu-icon');
+  const closeIcon = document.querySelector('.close-icon');
+  const nav = document.querySelector('header nav');
 
   if (!menuIcon) {
-    console.error("Menu icon not found!");
-  } else {
-    menuIcon.addEventListener("click", function () {
-      console.log("Menu icon clicked");
-      nav.classList.toggle("active");
-    });
-  }
-
-  if (!nav) {
-    console.error("Nav element not found!");
+    console.error('Menu icon not found!');
+    return;
   }
 
   if (!closeIcon) {
-    console.error("Close icon not found!");
-  } else {
-    closeIcon.addEventListener("click", function (event) {
-      console.log("Close icon clicked");
-      event.stopPropagation();
-      if (nav) {
-        nav.classList.remove("active");
-        console.log(
-          "Nav active class removed, current classes:",
-          nav.className
-        );
-      }
-    });
+    console.error('Close icon not found!');
+    return;
   }
 
+  if (!nav) {
+    console.error('Navigation not found!');
+    return;
+  }
+
+  console.log('Menu icon, close icon, and nav found'); // Hibakeresés: Ellenőrizzük, hogy az elemek megtalálhatók-e
+
+  menuIcon.addEventListener('click', () => {
+    console.log('Menu icon clicked'); // Hibakeresés: Ellenőrizzük, hogy az eseménykezelő fut-e
+    nav.classList.add('active');
+  });
+
+  closeIcon.addEventListener('click', () => {
+    console.log('Close icon clicked'); // Hibakeresés: Ellenőrizzük, hogy az eseménykezelő fut-e
+    nav.classList.remove('active');
+  });
+
+  // Nav linkekre kattintás esetén is zárjuk be a menüt
+  const navLinks = nav.querySelectorAll("a");
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      console.log("Nav link clicked");
+      nav.classList.remove("active");
+    });
+  });
+
+  // Galéria logika
   let currentSlide = 0;
   const slides = document.querySelectorAll(".slide");
   let autoSlideInterval;
@@ -64,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     prevButton.addEventListener("click", () => {
       clearInterval(autoSlideInterval);
       moveSlide(-1);
-      setTimeout(startAutoSlide, 5000);
+      setTimeout(startAutoSlide, 4000);
     });
   }
 
@@ -72,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     nextButton.addEventListener("click", () => {
       clearInterval(autoSlideInterval);
       moveSlide(1);
-      setTimeout(startAutoSlide, 5000);
+      setTimeout(startAutoSlide, 4000);
     });
   }
 
@@ -95,15 +101,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   fullTextOverlay.addEventListener("click", function () {
     fullTextOverlay.style.display = "none";
-  });
-
-  const navLinks = nav ? nav.querySelectorAll("a") : [];
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function () {
-      console.log("Nav link clicked");
-      if (nav) {
-        nav.classList.remove("active");
-      }
-    });
   });
 });

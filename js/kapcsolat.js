@@ -28,9 +28,31 @@ document
       alert("Kérjük, töltse ki az összes mezőt!");
     }
   });
+
 function googleTranslateElementInit() {
   new google.translate.TranslateElement(
     { pageLanguage: "hu" },
     "google_translate_element"
   );
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Hamburgermenü kezelése
+  const menuIcon = document.querySelector('.menu-icon');
+  const closeIcon = document.querySelector('.close-icon');
+  const nav = document.querySelector('header nav');
+
+  if (menuIcon && closeIcon && nav) {
+    menuIcon.addEventListener('click', function() {
+      nav.classList.add('active');
+      console.log("Hamburger menü megnyitva"); // Hibakeresés
+    });
+
+    closeIcon.addEventListener('click', function() {
+      nav.classList.remove('active');
+      console.log("Hamburger menü bezárva"); // Hibakeresés
+    });
+  } else {
+    console.error("Hiba: A menu-icon, close-icon vagy nav elem nem található!");
+  }
+});

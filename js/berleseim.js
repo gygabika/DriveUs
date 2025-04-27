@@ -97,3 +97,26 @@ function getStatus(startDate, endDate, status) {
     if (startDate > currentDate) return 'Jövőbeli bérlés';
     return 'Befejezve';
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuIcon = document.querySelector('.menu-icon');
+    const closeIcon = document.querySelector('.close-icon');
+    const nav = document.querySelector('header nav');
+
+    // Menü megnyitása
+    menuIcon.addEventListener('click', function() {
+        nav.classList.add('active');
+    });
+
+    // Menü bezárása
+    closeIcon.addEventListener('click', function() {
+        nav.classList.remove('active');
+    });
+
+    // Navigációs linkekre kattintáskor is bezárul a menü
+    document.querySelectorAll('header nav a').forEach(link => {
+        link.addEventListener('click', function() {
+            nav.classList.remove('active');
+        });
+    });
+}); 

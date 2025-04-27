@@ -25,26 +25,28 @@ header {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; 
   padding: 10px 20px;
   height: 60px;
 }
 
 header nav {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   color: black;
   text-decoration: none;
   font-weight: bold;
+  max-width: 50%;
 }
 
 header nav a {
   color: black;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border-radius: 5px;
   transition: all 0.3s ease;
   text-decoration: none;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 header nav a:hover {
@@ -56,15 +58,17 @@ header nav a:hover {
 
 #google_translate_element {
   position: absolute;
-  right: 20px;
+  left: 85%; 
   top: 50%;
   transform: translateY(-50%);
+  max-width: 150px; 
+  overflow: hidden;
 }
 
 #cegnev {
   color: black;
   font-weight: bold;
-  position: absolute;
+  position: absolute; 
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
@@ -76,6 +80,23 @@ main {
   padding: 50px 20px;
   text-align: center;
   flex: 1;
+}
+
+.close-icon {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: black;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: black;
 }
 
 h1 {
@@ -96,7 +117,7 @@ h2 {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-top: 20px; /* Felső margó, hogy a galéria ne lógjon rá */
+  margin-top: 20px;
 }
 
 .card {
@@ -162,24 +183,24 @@ footer p {
 .gallery-container {
   position: relative;
   width: 100%;
-  max-width: 600px; /* A galéria maximális szélessége */
-  height: 400px; /* Fix magasság a galériának */
-  margin: 0 auto 20px; /* Alsó margó, hogy ne lógjon rá a kártyákra */
+  max-width: 600px;
+  height: 400px;
+  margin: 0 auto 20px;
   overflow: hidden;
 }
 
 .slides {
   display: flex;
   width: 100%;
-  height: 100%; /* A slides konténer kitölti a galéria magasságát */
+  height: 100%;
 }
 
 .slide {
   display: none;
   width: 100%;
-  height: 100%; /* A kép kitölti a galéria magasságát */
-  object-fit: contain; /* Arányos méretezés, hogy a kép ne torzuljon */
-  object-position: center; /* Középre igazítás */
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .slide.active {
@@ -279,6 +300,7 @@ footer p {
   text-decoration: underline;
   color: #605308;
 }
+
 @media (max-width: 1024px) {
   .card {
     flex: 1 1 30%;
@@ -300,17 +322,22 @@ footer p {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
+    padding: 10px 10px;
   }
 
   .menu-icon {
     display: block;
-    order: 2;
-    margin-left: auto;
+    position: absolute;
+    left: 92%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+  }
+
+  .close-icon {
+    display: block;
   }
 
   header nav {
-    display: none;
     position: fixed;
     top: 0;
     right: 0;
@@ -323,13 +350,14 @@ footer p {
     padding: 20px 0;
     box-shadow: -2px 0 8px rgba(0, 0, 0, 0.5);
     transform: translateX(100%);
-    transition: transform 0.3s ease-in-out;
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     z-index: 1000;
   }
 
   header nav.active {
-    display: flex;
     transform: translateX(0);
+    opacity: 1;
   }
 
   header nav a {
@@ -344,8 +372,10 @@ footer p {
     border-bottom: none;
   }
 
-  .close-icon {
-    display: block;
+  #google_translate_element {
+    left: 125px;
+    max-width: 150px;
+    overflow: hidden;
   }
 
   h1 {
@@ -430,6 +460,17 @@ footer p {
   header nav a {
     padding: 15px;
     font-size: 16px;
+  }
+
+  #google_translate_element {
+    left: 125px;
+    max-width: 150px;
+    overflow: hidden;
+  }
+
+  .menu-icon {
+    left: 92%;
+    transform: translate(-50%, -50%);
   }
 
   h1 {

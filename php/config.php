@@ -1,9 +1,9 @@
 <?php
 $host = "localhost";
 $username = "root";
-$password = "asd123";
+$password = "";
 $dbname = "driveus";
-$port = 3306;
+$port = 3307;
 
 try {
     $sql = new mysqli($host, $username, $password, $dbname, $port);

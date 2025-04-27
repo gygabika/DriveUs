@@ -1,3 +1,16 @@
+<?php
+session_start();
+require_once './config.php';
+
+$felhAz = $_SESSION['felhAz'] ?? null;
+$alert_message = '';
+
+if (!$felhAz) {
+    header("Location: ./bejelentkezes.php");
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -10,7 +23,9 @@
 <body>
     <header>
         <h1 id="cegnev">DriveUs</h1>
+        <div class="menu-icon">☰</div> 
         <nav>
+            <div class="close-icon">Bezárás ✕</div> 
             <a href="./index.php">FŐOLDAL</a>
             <a href="./autok.php">AUTÓK</a>
             <a href="./kapcsolat.php">KAPCSOLAT</a>
@@ -18,10 +33,10 @@
         </nav>
         <div id="google_translate_element"></div>
         <script>
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({pageLanguage: 'hu'}, 'google_translate_element');
-            }
-        </script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'hu'}, 'google_translate_element');
+        }
+    </script>
     </header>
     <main>
         <section class="intro">

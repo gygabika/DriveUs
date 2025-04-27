@@ -103,18 +103,30 @@ $felhasznalo_adatok = $eredmeny->fetch_assoc();
 <body>
     <header>
         <h1 id="cegnev">DriveUs</h1>
+        <div class="menu-icon">☰</div> 
         <nav>
+            <div class="close-icon">Bezárás ✕</div> 
             <a href="./index.php">FŐOLDAL</a>
             <a href="./autok.php">AUTÓK</a>
             <a href="./kapcsolat.php">KAPCSOLAT</a>
             <a href="./berleseim.php">BÉRLÉSEIM</a>
+            <div class="footer-links">
+                <?php if (isset($_SESSION['felhAz'])): ?>
+                    <a href="./kijelentkezes.php" class="mobile-footer-link">Kijelentkezés</a>
+                    <a href="./szerkesztes.php" class="mobile-footer-link">Profil szerkesztés</a>
+                    <a href="#" class="mobile-footer-link" onclick="confirmDelete()">Profil törlése</a>
+                <?php else: ?>
+                    <a href="./regisztracio.php" class="mobile-footer-link">Regisztráció</a>
+                    <a href="./bejelentkezes.php" class="mobile-footer-link">Bejelentkezés</a>
+                <?php endif; ?>
+            </div>
         </nav>
         <div id="google_translate_element"></div>
         <script>
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({pageLanguage: 'hu'}, 'google_translate_element');
-            }
-        </script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'hu'}, 'google_translate_element');
+        }
+    </script>
     </header>
 
     <div class="container">
@@ -123,14 +135,14 @@ $felhasznalo_adatok = $eredmeny->fetch_assoc();
         <div class="profile-info card">
             <div class="profile-data-box">
                 <div>
-                <h2>Jelenlegi adatok</h2>
-                <p>Teljes név: <span id="current-teljesNev-display"><?php echo htmlspecialchars($felhasznalo_adatok['teljesNev'] ?? ''); ?></span></p>
-                <p>Felhasználónév: <span id="current-felhaszNev-display"><?php echo htmlspecialchars($felhasznalo_adatok['felhaszNev'] ?? ''); ?></span></p>
-                <p>Email: <span id="current-email-display"><?php echo htmlspecialchars($felhasznalo_adatok['eMail'] ?? ''); ?></span></p>
-                <p>Telefonszám: <span id="current-telSzam-display"><?php echo htmlspecialchars($felhasznalo_adatok['telSzam'] ?? ''); ?></span></p>
-                <p>Személyi szám: <span id="current-szemIgSzam-display"><?php echo htmlspecialchars($felhasznalo_adatok['szemIgSzam'] ?? ''); ?></span></p>
-                <p>Jogosítványszám: <span id="current-jogositvanySzam-display"><?php echo htmlspecialchars($felhasznalo_adatok['jogositvanySzam'] ?? ''); ?></span></p>
-                <p>Jelenlegi tagság: <span id="current-membership-display"><?php echo htmlspecialchars(ucfirst($felhasznalo_adatok['tagsag'] ?? 'új tag')); ?></span></p>
+                    <h2>Jelenlegi adatok</h2>
+                    <p>Teljes név: <span id="current-teljesNev-display"><?php echo htmlspecialchars($felhasznalo_adatok['teljesNev'] ?? ''); ?></span></p>
+                    <p>Felhasználónév: <span id="current-felhaszNev-display"><?php echo htmlspecialchars($felhasznalo_adatok['felhaszNev'] ?? ''); ?></span></p>
+                    <p>Email: <span id="current-email-display"><?php echo htmlspecialchars($felhasznalo_adatok['eMail'] ?? ''); ?></span></p>
+                    <p>Telefonszám: <span id="current-telSzam-display"><?php echo htmlspecialchars($felhasznalo_adatok['telSzam'] ?? ''); ?></span></p>
+                    <p>Személyi szám: <span id="current-szemIgSzam-display"><?php echo htmlspecialchars($felhasznalo_adatok['szemIgSzam'] ?? ''); ?></span></p>
+                    <p>Jogosítványszám: <span id="current-jogositvanySzam-display"><?php echo htmlspecialchars($felhasznalo_adatok['jogositvanySzam'] ?? ''); ?></span></p>
+                    <p>Jelenlegi tagság: <span id="current-membership-display"><?php echo htmlspecialchars(ucfirst($felhasznalo_adatok['tagsag'] ?? 'új tag')); ?></span></p>
                 </div>
                 <div class="profile-img-container">
                     <?php if ($felhasznalo_adatok['profilkep']): ?>
@@ -242,7 +254,7 @@ $felhasznalo_adatok = $eredmeny->fetch_assoc();
                 <a href="./kijelentkezes.php" class="btn btn-primary" style="color: black;">Kijelentkezés</a>
                 <a href="./szerkesztes.php" class="btn btn-primary" style="color: black;">Profil szerkesztés</a>
                 <form id="deleteForm" method="POST" action="profil_torles.php" style="display: none;">
-                <input type="hidden" name="torles_megerositve" value="1">
+                    <input type="hidden" name="torles_megerositve" value="1">
                 </form>
                 <button class="btn btn-primary" style="color: black;" onclick="confirmDelete()">Profil törlése</button>
             <?php else: ?>
@@ -257,12 +269,15 @@ $felhasznalo_adatok = $eredmeny->fetch_assoc();
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/profilom.js"></script>
     <script>
-function confirmDelete() {
-    if (confirm("Biztosan törölni szeretné a profilját? Ez a művelet nem visszavonható.")) {
-        // Ha igen, küldje el a formot
-        document.getElementById("deleteForm").submit();
-    }
-}
-</script>
+        function confirmDelete() {
+            if (confirm("Biztosan törölni szeretné a profilját? Ez a művelet nem visszavonható.")) {
+                document.getElementById("deleteForm").submit();
+            }
+        }
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'hu'}, 'google_translate_element');
+        }
+    </script>
 </body>
 </html>

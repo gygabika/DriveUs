@@ -10,7 +10,9 @@
 <body>
     <header>
         <h1 id="cegnev">DriveUs</h1>
+        <div class="menu-icon">☰</div> 
         <nav>
+            <div class="close-icon">Bezárás ✕</div> 
             <a href="./index.php">FŐOLDAL</a>
             <a href="./autok.php">AUTÓK</a>
             <a href="./profilom.php">PROFILOM</a>
@@ -18,10 +20,10 @@
         </nav>
         <div id="google_translate_element"></div>
         <script>
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({pageLanguage: 'hu'}, 'google_translate_element');
-            }
-        </script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'hu'}, 'google_translate_element');
+        }
+    </script>
     </header>
     <main>
         <section class="intro">
@@ -65,7 +67,7 @@
     </main>
     <footer>
         <img src="../assetts/logo.jpg" alt="DriveUs Logo" id="footer-img">
-        <p id="email">Vegye fel velünk a kapcsolatot: <a href="mailto:driveus.car.rent@gmail.com">driveus.car.rent@gmail.com</a></p>
+        <p id="aszf"><a href="../assetts/driveus_aszf.pdf" target="_blank">Általános Szerződési Feltételeket (ÁSzF)</a></p>
         <p id="footer_p">© 2025 DriveUs - Luxus autóbérlés</p>
     </footer>
 

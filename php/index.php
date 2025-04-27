@@ -8,21 +8,23 @@
     <title>DRIVEUS - FŐOLDAL</title>
 </head>
 <body>
-    <header>
-        <h1 id="cegnev">DriveUs</h1>
-        <nav>
-            <a href="./kapcsolat.php">KAPCSOLAT</a>
-            <a href="./autok.php">AUTÓK</a>
-            <a href="./berleseim.php">BÉRLÉSEIM</a>
-            <a href="./profilom.php">PROFILOM</a>
-        </nav>
-        <div id="google_translate_element"></div>
-        <script>
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({pageLanguage: 'hu'}, 'google_translate_element');
-            }
-        </script>
-    </header>
+<header>
+    <h1 id="cegnev">DriveUs</h1>
+    <div class="menu-icon">☰</div> 
+    <nav>
+        <div class="close-icon">Bezárás ✕</div> 
+        <a href="./kapcsolat.php">KAPCSOLAT</a>
+        <a href="./autok.php">AUTÓK</a>
+        <a href="./berleseim.php">BÉRLÉSEIM</a>
+        <a href="./profilom.php">PROFILOM</a>
+    </nav>
+    <div id="google_translate_element"></div>
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'hu'}, 'google_translate_element');
+        }
+    </script>
+</header>
     <main>
         <section class="intro"> 
             <h1>DriveUs - A szabadság, ami mindig úton van.</h1>
@@ -59,7 +61,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="gallery-container">
-                    <button id="kovetkezo" class="prev" onclick="moveSlide(-1)">❮</button>
+                    <button id="elozo" class="prev">❮</button>
 <?php
     include './config.php';
 
@@ -92,7 +94,7 @@
 
     $sql->close();
 ?>
-                    <button id="kovetkezo" class="next" onclick="moveSlide(1)">❯</button>
+                    <button id="kovetkezo" class="next">❯</button>
                 </div>
             </div>
             <div class="col-6">
